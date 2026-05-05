@@ -48,3 +48,5 @@ export ANDROIDNDKVER="r10e"  # Version of the NDK you installed
 export ANDROIDAPI=31
 export ANDROIDNDK=$HOME/Android/Sdk/ndk/25.2.9519653
 export ANDROIDSDK=$HOME/Android/Sdk
+
+https://chatgpt.com/share/69f9c40f-c89c-8332-91ad-a4baf77d8836

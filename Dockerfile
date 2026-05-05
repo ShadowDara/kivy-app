@@ -27,6 +27,7 @@ RUN apt-get update && apt-get install -y \
     python3-dev \
     cmake \
     ant \
+    lld \
     && rm -rf /var/lib/apt/lists/*
 
 # =========================
@@ -43,7 +44,8 @@ RUN apt-get update && apt-get install -y software-properties-common && \
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.10 1
 
 # pip for python 3.10
-RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3.10
+RUN python3.10 -m ensurepip && \
+    python3.10 -m pip install --upgrade pip
 
 # =========================
 # Python tools
