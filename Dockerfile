@@ -53,7 +53,7 @@ RUN python3.10 -m ensurepip && \
 RUN pip install --no-cache-dir \
     wheel \
     setuptools \
-    cython \
+    "cython<3"  \
     buildozer \
     python-for-android
 
