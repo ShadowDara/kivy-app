@@ -64,18 +64,19 @@ ENV ANDROID_HOME=/opt/android-sdk
 RUN mkdir -p $ANDROID_SDK_ROOT
 
 RUN wget -q https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip -O cmdline-tools.zip && \
-    unzip cmdline-tools.zip -d $ANDROID_SDK_ROOT && \
-    rm cmdline-tools.zip && \
-    mv $ANDROID_SDK_ROOT/cmdline-tools $ANDROID_SDK_ROOT/latest
+    mkdir -p $ANDROID_SDK_ROOT/cmdline-tools && \
+    unzip cmdline-tools.zip -d $ANDROID_SDK_ROOT/cmdline-tools && \
+    mv $ANDROID_SDK_ROOT/cmdline-tools/cmdline-tools $ANDROID_SDK_ROOT/cmdline-tools/latest && \
+    rm cmdline-tools.zip
 
-ENV PATH="$ANDROID_SDK_ROOT/latest/bin:$ANDROID_SDK_ROOT/platform-tools:$PATH"
+ENV PATH="$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools:$PATH"
 
 # =========================
 # Install SDK components
 # =========================
 RUN yes | sdkmanager --licenses
 
-RUN sdkmanager \
+RUN sdkmanager --sdk_root=$ANDROID_SDK_ROOT \
     "platform-tools" \
     "platforms;android-31" \
     "build-tools;31.0.0" \
